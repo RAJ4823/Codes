@@ -1,0 +1,93 @@
+1. ADT for Stack
+
+    Instances : Stack is a collection of a elements in which insertion and deletion done by one end called top.
+     
+    Operation :
+    1) Push : Elements can be pushed into the stack by this Operation. Before performing this Operation we should check wether stack is full or not.
+
+    2) Pop : Elemetns can be removed from stack using this Operation. Before performing this Operation we shoukd check wether stack is empty or not.
+
+
+2. Push Algorithm
+
+    Push(stack, top, element, n)
+    Stack  : stack
+    top    : index of last elements in array stack OR index of topmost element in stack
+    Element: element which will be inserted
+    n      : size of the stack (array)
+
+    Step 1 − Checks if the stack is full or not.
+    Step 2 − If the stack is full, goto step 5.
+    Step 3 − If the stack is not full, increments top by 1.
+    Step 4 − Add element into the stack at which top is pointing.
+    Step 5 − Exit.
+
+    -- ALGORITHM --
+
+    Step 1 - START
+    Step 2 - IF TOP == N-1
+        PRINT "STACK IS OVERFLOW"
+        GOTO STEP 5
+    Step 3 - TOP = TOP + 1
+    Step 4 - STACK[TOP] <- ELEMENT
+    Step 5 - EXIT
+
+
+3. Pop Algorithm
+
+    Pop(stack, top)
+    Stack  : stack
+    top    : index of topmost element in stack
+
+    Step 1 − Checks if the stack is empty or not.
+    Step 2 − If the stack is empty, goto step 5.
+    Step 3 − If the stack is not empty, accesses the element at which top is pointing.
+    Step 4 − Decreaments the value of top by 1.
+    Step 5 − Exit.
+
+    -- ALGORITHM --
+    Step 1 - START
+    Step 2 - IF TOP == -1
+        PRINT "STACK IS UNDERFLOW"
+        GOTO STEP 6
+    Step 3 - POPED_ELEMENT <- STACK[TOP]
+    Step 4 - TOP <- TOP - 1
+    Step 5 - PRINT POPED_ELEMENT
+    Step 6 - EXIT
+
+
+4. Infix to Postfix
+
+    Step 1 − Initialize the Stack.
+    Step 2 − Scan the character from left to right in the infix expression.
+    Step 3 − If the scanned character is an operand then set it in postfix expression.
+    Step 4 − If the scanned character is the operator then check
+        a) If the Stack is empty, push it into the Stack.
+        b) If priority of the scanned operator is higher than the operator of the Stack, push it into the Stack.
+        c) If priority of the scanned operator is lower than the operator of the Stack, pop all operators from the stack and set it in postfix expression. After that, push the scanned operator into the Stack.
+        d) If the scanned character is a left bracket '(', push it into the Stack.
+        e) If the scanned character is a right bracket ')', pop all characters from Stack until we get '(' and set it in postfix expression and discard both the bracket.
+    Step 5 − Repeat step 3 & step 4 until the infix expression is scanned.
+    Step 6 − Finally Pop all remaining characters of the Stack and set it in postfix expression.
+    Step 7 − Print the postfix expression.
+
+    Example : (A+B)*C -> AB+C*
+
+
+5. Infix to Prefix 
+
+    Step 1 − Reverse the infix expression.
+    Step 2 − Scan the reversed expression from left to right.
+    Step 3 − If the scanned character is an operand then set it in prefix expression.
+    Step 4 − If the scanned character is the operator then check.
+        a) If the Stack is empty, push it into the Stack.
+        b) If priority of the scanned operator is higher than the operator of the stack, push it into the stack.
+        c) If priority of the scanned operator is lower than the operator of the stack, pop operator from the stack.
+        d) Repeat Step 4(d) till it finds the operator of a lower priority and than push scanned operator into the stack.
+        e) If the operator is ')', then push it into the stack.
+        f) If the operator is '(', then pop all the operators from the stack till it finds ')' opening bracket in the stack.   
+    Step 5 − Repeat step 3 & step 4 until the infix expression is scanned.
+    Step 6 − Finally Pop all remaining characters of the Stack and set it in prefix expression.
+    Step 7 − Reverse the prefix expression and Print it.
+
+    Example : (A+B)*C -> *+ABC

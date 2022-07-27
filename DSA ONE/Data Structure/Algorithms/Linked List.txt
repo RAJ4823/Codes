@@ -1,0 +1,117 @@
+Linked List
+
+1. Traverse ---------------------------------------
+
+    Step 1 : SET PTR = HEAD
+    Step 2 : IF PTR == NULL 
+		Print "Linked List is Empty"
+		GO TO Step 6
+    Step 3 : Repeat Steps 4 and 5 while PTR != NULL
+    Step 4 :     Apply process to PTR -> DATA
+    Step 5 :     SET PTR = PTR->NEXT
+            [END OF LOOP]
+    Step 6 : EXIT
+
+
+    
+2. Insertion ---------------------------------------
+
+NEW_NODE - A node which will be inserted
+VAL      - A value/Data which user wants to insert
+NUM      - A value of node which after user wants to insert NEW_NODE
+
+-- common 4 Steps --
+
+    Step 1 : CREATE NEW_NODE using Malloc
+    Step 2 : IF NEW_NODE == NULL
+		PRINT "OVERFLOW" 
+		Go to Last     Step (EXIT)
+    Step 3 : GET VAL from user
+    Step 4 : SET NEW_NODE -> DATA = VAL
+
+A. Insert at Begin
+
+    Step 5 : SET NEW_NODE -> NEXT = HEAD
+    Step 6 : SET HEAD = NEW_NODE
+    Step 7 : EXIT
+
+B. Insert at Last
+
+    Step 5 : SET NEW_NODE -> NEXT = NULL
+    Step 6 : SET PTR = HEAD
+    Step 7 : Repeat Step 8 while PTR -> NEXT != NULL
+    Step 8 :     SET PTR = PTR -> NEXT
+             [END OF LOOP]
+    Step 9 : SET PTR -> NEXT = NEW_NODE
+   Step 10 : EXIT
+
+C. Insert after a Node
+
+    Step 5 : SET PTR = HEAD
+    Step 6 : SET PREPTR = PTR
+    Step 7 : Repeat Steps 8 and 9 while PREPTR -> DATA != NUM
+    Step 8 :     SET PREPTR = PTR
+    Step 9 :     SET PTR = PTR -> NEXT
+             [END OF LOOP]
+   Step 10 : SET NEW_NODE -> NEXT = PTR
+   Step 11 : PREPTR -> NEXT = NEW_NODE
+   Step 12 : EXIT
+
+
+
+3. Deletion ---------------------------------------
+
+-- common     Step --
+    Step 1 : IF HEAD == NULL
+           	Print "UNDERFLOW"
+           	Go to Last Step (EXIT)
+            [END OF IF]
+
+
+A. Delete from Begin
+
+    Step 2 : SET PTR = HEAD
+    Step 3 : SET HEAD = HEAD -> NEXT
+    Step 4 : FREE PTR
+    Step 5 : EXIT
+
+B. Delete from End
+
+    Step 2 : SET PTR = HEAD
+    Step 3 : SET PREPTR = PTR
+    Step 3 : Repeat Steps 4 and 5 while PTR -> NEXT != NULL
+    Step 4 :     SET PREPTR = PTR
+    Step 5 :     SET PTR = PTR -> NEXT
+             [END OF LOOP]
+    Step 6 : SET PREPTR -> NEXT = NULL
+    Step 7 : FREE PTR
+    Step 8 : EXIT
+
+C. Delete After a node
+
+    Step 2 : SET PTR = HEAD
+    Step 3 : SET PREPTR = PTR
+    Step 4 : Repeat Steps 5 and 6 while PREPTR -> DATA != NUM
+    Step 5 :     SET PREPTR = PTR
+    Step 6 :     SET PTR = PTR -> NEXT
+             [END OF LOOP]
+    Step 7 : SET PREPTR -> NEXT = PTR -> NEXT
+    Step 8 : FREE PTR
+    Step 9 : EXIT
+
+
+
+4. Search ---------------------------------------
+
+Step 1: SET PTR = HEAD
+Step 2: Repeat Steps 3 and 4 while PTR != NULL
+Step 3:     If ITEM = PTR -> DATA
+                SET POS = PTR
+		RETURN POS
+            ELSE
+                SET PTR = PTR -> NEXT
+            [END OF IF]
+        [END OF LOOP]
+Step 4: SET POS = NULL
+Step 5: EXIT
+
