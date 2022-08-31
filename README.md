@@ -16,7 +16,7 @@ Contains all codes written by RAJ.
 - [@RAJ4823](https://github.com/RAJ4823)
 
 
-![Logo](https://raj4823.github.io/SuperNotes/IMG/raj-logo-1.png)
+![Logo](https://rajhalpani.files.wordpress.com/2020/11/img_20200605_114002.jpg)
 
 
 ## Feedback
