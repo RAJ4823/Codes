@@ -7,6 +7,8 @@
         "cmath": "cpp",
         "vector": "cpp",
         "chrono": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp"
     }
 }
