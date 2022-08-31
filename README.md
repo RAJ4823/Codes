@@ -15,10 +15,6 @@ Contains all codes written by RAJ.
 
 - [@RAJ4823](https://github.com/RAJ4823)
 
-
-![Logo](https://rajhalpani.files.wordpress.com/2020/11/img_20200605_114002.jpg | width=500)
-
-
 ## Feedback
 
 If you have any feedback, please reach out to me at halpaniraj.hr4823@gmail.com
