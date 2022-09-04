@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int LIS(vector<int> &arr, int n)
+int longestIncreasingSubsequence(int arr[], int n)
 {
     vector<int> temp;
     temp.push_back(arr[0]);
@@ -21,14 +21,4 @@ int LIS(vector<int> &arr, int n)
         }
     }
     return len;
-}
-
-int main()
-{
-    int n;
-    cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    cout << LIS(arr, n) << endl;
 }
