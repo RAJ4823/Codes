@@ -9,7 +9,7 @@ Contains all codes written by RAJ.
  - [Codechef](https://www.codechef.com/users/the_247)
  - [Codeforces](https://codeforces.com/profile/Raj_4)
  - [HackerRank](https://www.hackerrank.com/raj_4823)
-
+ - [Coding Ninjas](https://www.codingninjas.com/codestudio/profile/92c4c4f1-b6ac-44ab-86cd-6cefd9071955)
 
 ## Authors
 
