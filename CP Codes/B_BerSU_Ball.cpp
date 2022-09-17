@@ -15,28 +15,39 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
+ll input(vll &v)
+{
+    ll n, x;
+    cin >> n;
+    f(i, n)
+    {
+        cin >> x;
+        v.push_back(x);
+    }
+    return n;
+}
+
 int main()
 {
-    int t;
-    cin >> t;
-
-    while (t--)
+    vll boy, girl;
+    ll n = input(boy);
+    ll m = input(girl);
+    ll count = 0;
+    sort(boy.begin(), boy.end());
+    sort(girl.begin(), girl.end());
+    f(i, n)
     {
-        int n, zero = 0;
-        cin >> n;
-        string s;
-        cin >> s;
-        f(i, n)
+        f(j, m)
         {
-            if (s[i] == '0')
-                zero++;
+            int diff = abs(boy[i] - girl[j]);
+            if (diff <= 1)
+            {
+                count++;
+                girl[j] = -1;
+                break;
+            }
         }
-
-        string ans = "BOB";
-        if (zero % 2 && zero > 1)
-            ans = "ALICE";
-
-        cout << ans << endl;
     }
+    cout << count << endl;
     return 0;
 }

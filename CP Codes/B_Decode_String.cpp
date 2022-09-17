@@ -22,21 +22,28 @@ int main()
 
     while (t--)
     {
-        int n, zero = 0;
+        int n;
         cin >> n;
-        string s;
-        cin >> s;
-        f(i, n)
+        string t, s = "";
+        cin >> t;
+        int i = n - 1, num;
+        while (i >= 0)
         {
-            if (s[i] == '0')
-                zero++;
+            if (t[i] == '0')
+            {
+                int dec = (int)(t[i - 2] - 48);
+                num = (int)(t[i - 1] - 48) + dec * 10;
+                i -= 3;
+            }
+            else
+            {
+                num = (int)(t[i] - 48);
+                i--;
+            }
+            s.push_back((char)(num + 96));
         }
-
-        string ans = "BOB";
-        if (zero % 2 && zero > 1)
-            ans = "ALICE";
-
-        cout << ans << endl;
+        reverse(s.begin(), s.end());
+        cout << s << endl;
     }
     return 0;
 }

@@ -22,20 +22,25 @@ int main()
 
     while (t--)
     {
-        int n, zero = 0;
+        int n;
         cin >> n;
-        string s;
-        cin >> s;
+        vll dp(n);
+        ll dist = 0;
         f(i, n)
         {
-            if (s[i] == '0')
-                zero++;
+            cin >> dp[i];
         }
-
-        string ans = "BOB";
-        if (zero % 2 && zero > 1)
-            ans = "ALICE";
-
+        sort(dp.begin(), dp.end());
+        ll ans = 0;
+        f(i, n)
+        {
+            dist++;
+            if (dp[i] == dist)
+            {
+                ans++;
+                dist = 0;
+            }
+        }
         cout << ans << endl;
     }
     return 0;

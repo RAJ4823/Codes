@@ -17,26 +17,25 @@ using namespace std;
 
 int main()
 {
-    int t;
-    cin >> t;
+    int n;
+    cin >> n;
+    int x, zero = 0, one = 0, ans = 0;
 
-    while (t--)
+    f(i, n)
     {
-        int n, zero = 0;
-        cin >> n;
-        string s;
-        cin >> s;
-        f(i, n)
+        cin >> x;
+        if (x == 0)
+            zero++;
+        else
         {
-            if (s[i] == '0')
-                zero++;
+            one++;
+            ans = max(ans, zero);
+            zero = max(0, --zero);
         }
-
-        string ans = "BOB";
-        if (zero % 2 && zero > 1)
-            ans = "ALICE";
-
-        cout << ans << endl;
     }
+    ans = max(ans, zero) + one;
+    if(ans == one)
+        ans--;
+    cout << ans << endl;
     return 0;
 }

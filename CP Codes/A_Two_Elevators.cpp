@@ -22,20 +22,22 @@ int main()
 
     while (t--)
     {
-        int n, zero = 0;
-        cin >> n;
-        string s;
-        cin >> s;
-        f(i, n)
-        {
-            if (s[i] == '0')
-                zero++;
-        }
+        int a, b, c;
+        cin >> a >> b >> c;
+        int diff1 = (a - 1);
+        int diff2;
+        if (b < c)
+            diff2 = (c - b) + (c - 1);
+        else
+            diff2 = (b - 1);
 
-        string ans = "BOB";
-        if (zero % 2 && zero > 1)
-            ans = "ALICE";
-
+        int ans;
+        if (diff1 == diff2)
+            ans = 3;
+        else if (diff1 < diff2)
+            ans = 1;
+        else
+            ans = 2;
         cout << ans << endl;
     }
     return 0;
