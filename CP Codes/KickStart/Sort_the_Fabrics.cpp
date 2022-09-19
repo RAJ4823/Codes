@@ -4,6 +4,7 @@ using namespace std;
 #define vpll vector<pair<ll, ll>>
 #define vvll vector<vector<ll>>
 #define vll vector<ll>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
 #define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
@@ -15,18 +16,41 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
+void solve()
+{
+    int n;
+    cin >> n;
+    vector<pair<string, int>> v1(n);
+    vector<pair<int, int>> v2(n);
+    string s;
+    int d, u, count = 0;
+
+    f(i, n)
+    {
+        cin >> s >> d >> u;
+        v1[i] = {s, u};
+        v2[i] = {d, u};
+    }
+    sort(v1.begin(), v1.end());
+    sort(v2.begin(), v2.end());
+    
+    f(i, n)
+    {
+        if (v1[i].second == v2[i].second)
+            count++;
+    }
+    cout << count << endl;
+}
+
 int main()
 {
-    int n, l;
-    cin >> n >> l;
-    vll a(n);
-    f(i, n) cin >> a[i];
-    sort(a.begin(), a.end());
-    ll x = 2 * max(a[0], l - a[n - 1]);
-    for (int i = 0; i < n - 1; i++)
+    int t;
+    cin >> t;
+
+    f(i, t)
     {
-        x = max(x, (a[i + 1] - a[i]));
+        cout << "Case #" << i + 1 << ": ";
+        solve();
     }
-    printf("%.10lf", x / 2.);
     return 0;
 }
