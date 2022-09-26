@@ -4,6 +4,7 @@ using namespace std;
 #define vpll vector<pair<ll, ll>>
 #define vvll vector<vector<ll>>
 #define vll vector<ll>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
 #define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
@@ -15,27 +16,31 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
-//! O(1) space complexity solution
 int main()
 {
     int t;
     cin >> t;
+
     while (t--)
     {
-        ll n, curr = 0, prev = 0, maxi = -1e9, ans = 0;
+        int n, x;
         cin >> n;
-        f(i, n)
+        vll v(n);
+        vpll steps;
+        f(i, n) cin >> v[i];
+        if ((v[0] + v[n - 1]) % 2)
+            x = v[0];
+        else
+            x = v[n - 1];
+        cout << n - 1 << endl;
+        if(n > 1) cout << 1 << ' ' << n << endl;
+        ff(i, 1, n - 1)
         {
-            cin >> curr;
-            if (i > 0 && (prev > 0) != (curr > 0))
-            {
-                ans += maxi;
-                maxi = -1e9;
-            }
-            maxi = max(maxi, curr);
-            prev = curr;
+            if ((x + v[i]) % 2)
+                cout << 1 << ' ' << i + 1 << endl;
+            else
+                cout << i + 1 << ' ' << n << endl;
         }
-        cout << ans + maxi << endl;
     }
     return 0;
 }
