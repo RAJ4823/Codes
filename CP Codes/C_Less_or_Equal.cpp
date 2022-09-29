@@ -4,6 +4,7 @@ using namespace std;
 #define vpll vector<pair<ll, ll>>
 #define vvll vector<vector<ll>>
 #define vll vector<ll>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
 #define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
@@ -17,15 +18,19 @@ using namespace std;
 
 int main()
 {
-    int t;
-    cin >> t;
+    ll n, k;
+    cin >> n >> k;
+    vll v(n + 1);
+    f(i, n) cin >> v[i];
+    v[n] = INT_MAX;
 
-    while (t--)
-    {
-        int n;
-        cin >> n;
-        int ans = n + (n / 2) * 2 + (n / 3) * 2;
-        cout << ans << endl;
-    }
+    sort(v.begin(), v.end());
+    ll ans = -1;
+
+    if (k == 0)
+        ans = (v[0] == 1) ? -1 : 1;
+    else if (v[k - 1] != v[k])
+        ans = v[k - 1];
+    cout << ans << endl;
     return 0;
 }

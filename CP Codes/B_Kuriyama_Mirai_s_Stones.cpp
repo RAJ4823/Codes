@@ -4,6 +4,7 @@ using namespace std;
 #define vpll vector<pair<ll, ll>>
 #define vvll vector<vector<ll>>
 #define vll vector<ll>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
 #define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
@@ -17,15 +18,23 @@ using namespace std;
 
 int main()
 {
-    int t;
-    cin >> t;
+    ll n, m;
+    cin >> n;
+    vll arr(n);
+    vvll sum(2, vll(n + 1, 0));
 
-    while (t--)
+    f(i, n) cin >> arr[i];
+    f(i, n) sum[0][i + 1] = arr[i] + sum[0][i];
+    sort(arr.begin(), arr.end());
+    f(i, n) sum[1][i + 1] = arr[i] + sum[1][i];
+
+    cin >> m;
+    while (m--)
     {
-        int n;
-        cin >> n;
-        int ans = n + (n / 2) * 2 + (n / 3) * 2;
-        cout << ans << endl;
+        ll t, l, r;
+        cin >> t >> l >> r;
+        t--;
+        cout << (sum[t][r] - sum[t][l - 1]) << endl;
     }
     return 0;
 }

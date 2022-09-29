@@ -2,8 +2,9 @@
 using namespace std;
 #define ll long long
 #define vpll vector<pair<ll, ll>>
-#define vvll vector<vector<ll>>
-#define vll vector<ll>
+#define vvll vector<vector<char>>
+#define vll vector<char>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
 #define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
@@ -22,10 +23,29 @@ int main()
 
     while (t--)
     {
-        int n;
-        cin >> n;
-        int ans = n + (n / 2) * 2 + (n / 3) * 2;
-        cout << ans << endl;
+        int n, k, r, c;
+        cin >> n >> k >> r >> c;
+        r--;
+        c--;
+        int row = 0, col = (c + r) % n;
+        int steps = (n / k);
+        vvll v(n, vll(n, '.'));
+        f(i, n)
+        {
+            int j = (col + n - i) % n;
+            int count = 0;
+            while (count < steps)
+            {
+                v[i][j] = 'X';
+                j = (j + k) % n;
+                count++;
+            }
+        }
+        fauto(i, v)
+        {
+            fauto(j, i) cout << j;
+            cout << endl;
+        }
     }
     return 0;
 }

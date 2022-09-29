@@ -4,6 +4,7 @@ using namespace std;
 #define vpll vector<pair<ll, ll>>
 #define vvll vector<vector<ll>>
 #define vll vector<ll>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
 #define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
@@ -22,10 +23,28 @@ int main()
 
     while (t--)
     {
-        int n;
+        ll n;
         cin >> n;
-        int ans = n + (n / 2) * 2 + (n / 3) * 2;
-        cout << ans << endl;
+
+        vll a(n + 1), b(n + 1);
+        bool flag = true;
+        ll same = true;
+
+        f(i, n) cin >> a[i];
+        f(i, n) cin >> b[i];
+        a[n] = a[0];
+        b[n] = b[0];
+        f(i, n + 1)
+        {
+            if ((a[i] > b[i]) || (b[i] - b[i + 1] > 1))
+                flag = false;
+            if (a[i] == b[i])
+                same++;
+        }
+        if (flag && same == n + 1)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
     }
     return 0;
 }
