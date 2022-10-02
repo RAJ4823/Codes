@@ -16,39 +16,35 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
+void solve()
+{
+    ll n;
+    cin >> n;
+    vll v(n), ans(n);
+    f(i, n) cin >> v[i];
+
+    ans[0] = v[0];
+    ff(i, 1, n)
+    {
+        ll x = v[i] + ans[i - 1];
+        ll y = ans[i - 1] - v[i];
+        if (min(x, y) >= 0 && x != y)
+        {
+            cout << -1 << endl;
+            return;
+        }
+        ans[i] = max(x, y);
+    }
+    fauto(x, ans) cout << x << " ";
+    cout << endl;
+}
+
 int main()
 {
     int t;
     cin >> t;
-
     while (t--)
     {
-        ll n;
-        cin >> n;
-        vll v(n), a(n);
-
-        f(i, n) cin >> v[i];
-        a[0] = v[0];
-        bool flag = true;
-        ff(i, 1, n)
-        {
-            ll x1 = v[i] + a[i - 1];
-            ll x2 = a[i - 1] - v[i];
-
-            if (x1 > 0 && x2 > 0 && x1 != x2)
-                flag = false;
-            else if (max(x1, x2) >= 0)
-                a[i] = max(x1, x2);
-        }
-        if (flag)
-        {
-            fauto(i, a) cout << i << ' ';
-            cout << endl;
-        }
-        else
-        {
-            cout << -1 << endl;
-        }
+        solve();
     }
-    return 0;
 }
