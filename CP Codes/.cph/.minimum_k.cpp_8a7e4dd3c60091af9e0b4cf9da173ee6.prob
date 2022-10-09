@@ -1,0 +1,1 @@
+{"name":"Local: minimum_k","url":"f:\\Codes\\CP Codes\\minimum_k.cpp","tests":[{"id":1665233971673,"input":"4 5\n5 3 6 8","output":"6"},{"id":1665235473690,"input":"5 7\n8 8 3 5 6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\Codes\\CP Codes\\minimum_k.cpp","group":"local","local":true}
