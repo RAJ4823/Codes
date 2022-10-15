@@ -3,6 +3,8 @@
         "iostream": "cpp",
         "array": "cpp",
         "string_view": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "ostream": "cpp",
+        "random": "cpp"
     }
 }
