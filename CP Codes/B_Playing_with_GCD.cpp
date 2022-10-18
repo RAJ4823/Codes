@@ -16,6 +16,12 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
+ll lcm(ll a, ll b)
+{
+    ll g = __gcd(a, b);
+    return (a * b / g);
+}
+
 int main()
 {
     int t;
@@ -25,13 +31,13 @@ int main()
     {
         ll n;
         cin >> n;
-        vll v(n);
+        vll v(n + 2, 1);
         bool flag = true;
-
-        f(i, n) cin >> v[i];
-        f(i, n - 2)
+        for (int i = 1; i <= n; i++)
+            cin >> v[i];
+        for (int i = 1; i <= n; i++)
         {
-            if (__gcd(v[i], v[i + 2]) > __gcd(v[i], v[i + 1]))
+            if (__gcd(lcm(v[i], v[i - 1]), lcm(v[i], v[i + 1])) != v[i])
             {
                 flag = false;
                 break;
