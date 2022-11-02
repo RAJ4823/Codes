@@ -16,44 +16,35 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
-ll DFS(vll g[], ll v, vector<bool> &vis, vll &arr, ll mini)
-{
-    vis[v] = true;
-    for (auto child : g[v])
-    {
-        if (vis[child])
-            continue;
-        mini = min(mini, DFS(g, child, vis, arr, mini));
-    }
-    return min(mini, arr[v]);
-}
-
 int main()
 {
-    ll v, e, s = 0;
-    cin >> v >> e;
-    vll arr(v), g[v];
-
-    f(i, v) cin >> arr[i];
-    f(i, e)
+    ll n, m;
+    cin >> n >> m;
+    vll v(n + 1, 0);
+    f(i, n)
     {
-        ll u, v;
-        cin >> u >> v;
-        u--;
-        v--;
-        g[u].push_back(v);
-        g[v].push_back(u);
+        ll x;
+        cin >> x;
+        v[i + 1] = v[i] + x;
     }
-
-    vector<bool> vis(v, false);
-
+    ll i = 0, j = 1;
     ll ans = 0;
-    f(i, v)
+    while (j <= n)
     {
-        if (vis[i])
-            continue;
-        ans += DFS(g, i, vis, arr, INT_MAX);
+        if (v[j] - v[i] <= m)
+        {
+            // db2(i, j);
+            ans = max(ans, j - i);
+            j++;
+        }
+        else
+        {
+            i++;
+            if (i == j)
+                j++;
+        }
     }
     cout << ans << endl;
+
     return 0;
 }

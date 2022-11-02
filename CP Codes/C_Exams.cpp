@@ -16,44 +16,26 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
-ll DFS(vll g[], ll v, vector<bool> &vis, vll &arr, ll mini)
-{
-    vis[v] = true;
-    for (auto child : g[v])
-    {
-        if (vis[child])
-            continue;
-        mini = min(mini, DFS(g, child, vis, arr, mini));
-    }
-    return min(mini, arr[v]);
-}
-
 int main()
 {
-    ll v, e, s = 0;
-    cin >> v >> e;
-    vll arr(v), g[v];
-
-    f(i, v) cin >> arr[i];
-    f(i, e)
+    ll n;
+    cin >> n;
+    vpll vp(n);
+    f(i, n)
     {
-        ll u, v;
-        cin >> u >> v;
-        u--;
-        v--;
-        g[u].push_back(v);
-        g[v].push_back(u);
+        ll x, y;
+        cin >> x >> y;
+        vp[i] = {x, y};
     }
-
-    vector<bool> vis(v, false);
-
-    ll ans = 0;
-    f(i, v)
+    ll day = 0;
+    sort(vp.begin(), vp.end());
+    f(i, n)
     {
-        if (vis[i])
-            continue;
-        ans += DFS(g, i, vis, arr, INT_MAX);
+        if (day > vp[i].second)
+            day = vp[i].first;
+        else
+            day = vp[i].second;
     }
-    cout << ans << endl;
+    cout << day << endl;
     return 0;
 }
