@@ -16,39 +16,52 @@ using namespace std;
 
 int main()
 {
-    ll n, t, sum = 0;
-    cin >> n >> t;
-    vll m(n);
+    ll n, q, sum = 0;
+    cin >> n >> q;
+    vll v(n);
+    vll fq(n, 0), fValue(n, 0);
 
     f(i, n)
     {
-        cin >> m[i];
-        sum += m[i];
+        cin >> v[i];
+        fValue[i] = v[i];
+        sum += v[i];
     }
 
-    ll s, sval, f, fval;
-
-    while (t--)
+    ll sq = 0, sValue = 0;
+    f(index, q)
     {
-        int i;
-        cin >> i;
+        ll task, val, i;
+        cin >> task;
 
-        if (i == 1)
+        if (task == 1)
         {
-            ll i, value;
-            cin >> i >> value;
+            cin >> i >> val;
             i--;
-            f = i;
-            fval = value;
-          
+
+            if (sq > fq[i])
+            {
+                v[i] = sValue;
+            }
+            else
+            {
+                v[i] = fValue[i];
+            }
+
+            fValue[i] = val;
+            fq[i] = index;
+
+            sum -= v[i];
+            sum += val;
             cout << sum << endl;
         }
         else
         {
-            ll value;
-            cin >> value;
-            
-            sum = n * value;
+            cin >> val;
+            sum = n * val;
+            sq = index;
+            sValue = val;
+
             cout << sum << endl;
         }
     }
