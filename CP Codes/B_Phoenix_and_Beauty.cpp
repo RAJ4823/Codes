@@ -23,20 +23,44 @@ int main()
 
     while (t--)
     {
-        ll n, m;
-        cin >> n >> m;
-        f(i, m)
+        ll n, k, maxi = 0;
+        cin >> n >> k;
+
+        vll v(n);
+        set<ll> s;
+        f(i, n)
         {
-            ll x, y;
-            cin >> x >> y;
+            cin >> v[i];
+            s.insert(v[i]);
         }
-        if (n > m)
+
+        if (s.size() > k)
         {
-            cout << "YES\n";
+            cout << -1 << endl;
         }
         else
         {
-            cout << "NO\n";
+            vll arr, dist;
+            ll i = 1, j = 0;
+
+            while (s.size() < k && i <= n)
+            {
+                s.insert(i);
+                i++;
+            }
+            fauto(i, s) dist.push_back(i);
+            i = 0;
+            while (i < n)
+            {
+                if (dist[j] == v[i])
+                    i++;
+                arr.push_back(dist[j]);
+                j = (j + 1) % (s.size());
+            }
+
+            cout << arr.size() << endl;
+            fauto(val, arr) cout << val << ' ';
+            cout << endl;
         }
     }
     return 0;

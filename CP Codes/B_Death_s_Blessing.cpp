@@ -25,18 +25,19 @@ int main()
     {
         ll n;
         cin >> n;
-
-        vpll vp(n), arr(n);
-        f(i, n) cin >> vp[i].first;
+        ll x, y;
         ll maxi = 0, sum = 0;
+
         f(i, n)
         {
-            cin >> vp[i].second;
-            maxi = max(maxi, vp[i].second);
+            cin >> x;
+            sum += x;
         }
         f(i, n)
         {
-            sum += (vp[i].first + vp[i].second);
+            cin >> y;
+            sum += y;
+            maxi = max(maxi, y);
         }
         cout << sum - maxi << endl;
     }
