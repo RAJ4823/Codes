@@ -1,4 +1,6 @@
-//?https://practice.geeksforgeeks.org/problems/replace-os-with-xs0052/1
+//? https://practice.geeksforgeeks.org/problems/replace-os-with-xs0052/1
+//? https://leetcode.com/problems/surrounded-regions/
+
 #include <bits/stdc++.h>
 using namespace std;
 
