@@ -13,38 +13,26 @@ using namespace std;
 #define ffr(i, a, b) for (int i = (a); i >= (b); i--)
 #define db1(x) cout << #x << " = " << (x) << "\n";
 #define db2(x, y) cout << #x << " = " << (x) << " " << #y << " = " << (y) << "\n"
-#define SIZE 1000001
+#define SIZE 10001
 #define MOD 1000000007LL
 
 int main()
 {
     ll n, m;
     cin >> n >> m;
-    if (m <= n)
+    ll steps = 0;
+
+    while (n < m)
     {
-        cout << (n - m) << endl;
-    }
-    else
-    {
-        ll cnt1 = 0, cnt2 = 0;
-        ll x = n, y = m;
-        while (x < m)
-        {
-            x *= 2;
-            cnt1++;
-        }
-        cnt1 += (x - m);
-        while (n < y && y % 2 == 0)
-        {
-            y /= 2;
-            cnt2++;
-        }
-        if (y < n)
-            cnt2 += (n - y);
+        if (m % 2)
+            m++;
         else
-            cnt2 = INT_MAX;
-        db2(cnt1, cnt2);
-        cout << min(cnt1, cnt2) << endl;
+            m /= 2;
+        steps++;
     }
+    steps += (n - m);
+
+    cout << steps << endl;
+
     return 0;
 }
