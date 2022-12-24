@@ -33,7 +33,7 @@ int main()
     int n;
     cin >> n;
     vvll arr(2, vll(n));
-    vvll dp(2, vll(n, 0));
+    vvll dp(2, vll(n, 0)); 
     f(j, n) cin >> arr[0][j];
     f(j, n) cin >> arr[1][j];
 

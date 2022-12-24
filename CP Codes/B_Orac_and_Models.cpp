@@ -16,27 +16,6 @@ using namespace std;
 #define SIZE 1000001
 #define MOD 1000000007LL
 
-ll find(int i, int prev, vll &arr, vvll &dp)
-{
-    if (i == 0)
-    {
-        if (prev < arr.size())
-            return (arr[i] < arr[prev] && arr[prev] % arr[i] == 0);
-        return 1;
-    }
-    if (dp[i][prev] != -1)
-        return dp[i][prev];
-
-    ll take = -1e9, nottake = -1e9;
-    if (prev == arr.size())
-        take = 1 + find(i - 1, i, arr, dp);
-    else if (arr[i] < arr[prev] && arr[prev] % arr[i] == 0)
-        take = 1 + find(i - 1, i, arr, dp);
-    nottake = find(i - 1, prev, arr, dp);
-
-    return dp[i][prev] = max(take, nottake);
-}
-
 int main()
 {
     int t;
@@ -46,12 +25,19 @@ int main()
     {
         int n;
         cin >> n;
-        vll arr(n);
-        vvll dp(n, vll(n + 1, -1));
+        vll arr(n + 1), dp(n + 1, 1);
+        ff(i, 1, n + 1) cin >> arr[i];
 
-        f(i, n) cin >> arr[i];
-
-        ll ans = find(n - 1, n, arr, dp);
+        ll ans = 0;
+        ff(i, 1, n + 1)
+        {
+            for (int j = i * 2; j <= n; j += i)
+            {
+                if (arr[i] < arr[j])
+                    dp[j] = max(dp[j], dp[i] + 1);
+            }
+            ans = max(ans, dp[i]);
+        }
         cout << ans << endl;
     }
     return 0;
