@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "vector": "cpp"
+        "*.ejs": "html",
+        "vector": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp"
     }
 }

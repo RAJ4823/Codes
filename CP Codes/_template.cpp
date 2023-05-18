@@ -1,9 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
+#define vpll vector<pair<ll, ll>>
 #define vvll vector<vector<ll>>
 #define vll vector<ll>
+#define pll pair<ll, ll>
 #define mll map<ll, ll>
+#define fauto(i, a) for (auto &i : a)
 #define f(i, n) for (int i = 0; i < (n); i++)
 #define ff(i, a, b) for (int i = (a); i < (b); i++)
 #define fr(i, n) for (int i = (n); i >= 0; i--)
@@ -16,8 +19,6 @@ using namespace std;
 
 int main()
 {
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
     int t;
     cin>>t;
 

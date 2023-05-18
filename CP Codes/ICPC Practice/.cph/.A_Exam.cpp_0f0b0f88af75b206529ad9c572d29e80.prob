@@ -1,0 +1,1 @@
+{"name":"Local: A_Exam","url":"f:\\Codes\\CP Codes\\ICPC Practice\\A_Exam.cpp","tests":[{"id":1678720158248,"input":"3\nFTFFF\nTFTTT","output":"2"},{"id":1678720167595,"input":"6\nTTFTFFTFTF\nTTTTFFTTTT","output":"9"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\Codes\\CP Codes\\ICPC Practice\\A_Exam.cpp","group":"local","local":true}
