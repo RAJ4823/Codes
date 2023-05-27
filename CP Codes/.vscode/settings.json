@@ -25,5 +25,6 @@
       "cstdlib": "cpp",
       "numeric": "cpp",
       "map": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
