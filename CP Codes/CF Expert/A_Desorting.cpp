@@ -34,56 +34,40 @@ using namespace std;
 #define dbb(x, y) cout << (#x) << " = " << x << " , " << (#y) << " = " << y << "\n"
 
 #define PI 3.1415926535897932384626433832795
+#define INF LONG_LONG_MAX
 #define MOD 1000000007LL
 #define MODD 998244353
-
-bool find()
-{
-    ll n, m, k;
-    cin >> n;
-    sll st;
-    vll arr(n - 1);
-    st.insert(n);
-
-    f(i, 0, n - 1)
-    {
-        cin >> arr[i];
-        st.insert(i + 1);
-    }
-
-    ll value = -1;
-    if (st.count(arr[0]))
-        st.erase(arr[0]);
-    else
-        value = arr[0];
-
-    f(i, 1, n - 1)
-    {
-        ll diff = arr[i] - arr[i - 1];
-        if (st.count(diff))
-            st.erase(diff);
-        else if (value == -1)
-            value = diff;
-        else
-            return false;
-    }
-
-    ll remSum = 0;
-    fauto(x, st) remSum += x;
-
-    if (value >= 0)
-        return (remSum == value);
-
-    ll total = n * (n + 1) / 2;
-    return (total - arr[n - 2] == remSum);
-}
 
 int main()
 {
     int t;
     cin >> t;
+
     while (t--)
     {
-        print_condition(find(), "YES", "NO");
+        ll n;
+        cin >> n;
+        vll v(n);
+        f(i, 0, n) cin >> v[i];
+        
+        bool sorted = true;
+        ll minDiff = INF;
+        f(i, 0, n - 1)
+        {
+            ll diff = abs(v[i + 1] - v[i]);
+            minDiff = min(diff, minDiff);
+            if (v[i] > v[i + 1])
+                sorted = false;
+        }
+
+        if (!sorted)
+        {
+            cout << 0 << endl;
+        }
+        else
+        {
+            cout << (minDiff + 2) / 2 << endl;
+        }
     }
+    return 0;
 }

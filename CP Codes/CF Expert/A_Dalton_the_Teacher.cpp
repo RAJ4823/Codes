@@ -17,7 +17,7 @@ using namespace std;
 #define sll set<ll>
 
 #define fauto(i, a) for (auto &i : a)
-#define f(i, s, e) for (int i = s; i < e; i++)
+#define f(i, s, e) for (int i = s; i <= e; i++)
 #define fr(i, s, e) for (int i = s; i >= e; i--)
 
 #define all(x) (x).begin(), (x).end()
@@ -34,56 +34,35 @@ using namespace std;
 #define dbb(x, y) cout << (#x) << " = " << x << " , " << (#y) << " = " << y << "\n"
 
 #define PI 3.1415926535897932384626433832795
+#define INF LONG_LONG_MAX
 #define MOD 1000000007LL
 #define MODD 998244353
-
-bool find()
-{
-    ll n, m, k;
-    cin >> n;
-    sll st;
-    vll arr(n - 1);
-    st.insert(n);
-
-    f(i, 0, n - 1)
-    {
-        cin >> arr[i];
-        st.insert(i + 1);
-    }
-
-    ll value = -1;
-    if (st.count(arr[0]))
-        st.erase(arr[0]);
-    else
-        value = arr[0];
-
-    f(i, 1, n - 1)
-    {
-        ll diff = arr[i] - arr[i - 1];
-        if (st.count(diff))
-            st.erase(diff);
-        else if (value == -1)
-            value = diff;
-        else
-            return false;
-    }
-
-    ll remSum = 0;
-    fauto(x, st) remSum += x;
-
-    if (value >= 0)
-        return (remSum == value);
-
-    ll total = n * (n + 1) / 2;
-    return (total - arr[n - 2] == remSum);
-}
 
 int main()
 {
     int t;
     cin >> t;
+
     while (t--)
     {
-        print_condition(find(), "YES", "NO");
+        ll n;
+        cin >> n;
+        vll v(n + 1);
+
+        ll count = 0;
+        f(i, 1, n)
+        {
+            cin >> v[i];
+        }
+        f(i, 1, n)
+        {
+            if (i == v[i])
+            {
+                count++;
+            }
+        }
+
+        cout << (count + 1) / 2 << endl;
     }
+    return 0;
 }

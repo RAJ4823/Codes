@@ -34,56 +34,38 @@ using namespace std;
 #define dbb(x, y) cout << (#x) << " = " << x << " , " << (#y) << " = " << y << "\n"
 
 #define PI 3.1415926535897932384626433832795
+#define INF LONG_LONG_MAX
 #define MOD 1000000007LL
 #define MODD 998244353
 
-bool find()
+ll find(int i, vll &dp, mll &cnt)
 {
-    ll n, m, k;
-    cin >> n;
-    sll st;
-    vll arr(n - 1);
-    st.insert(n);
+    if (i == 1)
+        return cnt[1];
+    if (i <= 0)
+        return 0;
+    if (dp[i] != -1)
+        return dp[i];
 
-    f(i, 0, n - 1)
-    {
-        cin >> arr[i];
-        st.insert(i + 1);
-    }
-
-    ll value = -1;
-    if (st.count(arr[0]))
-        st.erase(arr[0]);
-    else
-        value = arr[0];
-
-    f(i, 1, n - 1)
-    {
-        ll diff = arr[i] - arr[i - 1];
-        if (st.count(diff))
-            st.erase(diff);
-        else if (value == -1)
-            value = diff;
-        else
-            return false;
-    }
-
-    ll remSum = 0;
-    fauto(x, st) remSum += x;
-
-    if (value >= 0)
-        return (remSum == value);
-
-    ll total = n * (n + 1) / 2;
-    return (total - arr[n - 2] == remSum);
+    ll take = (cnt[i] * i) + find(i - 2, dp, cnt);
+    ll nottake = find(i - 1, dp, cnt);
+    return dp[i] = max(take, nottake);
 }
 
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
+    ll n, x, mx = 0;
+    cin >> n;
+    mll cnt;
+
+    f(i, 0, n)
     {
-        print_condition(find(), "YES", "NO");
+        cin >> x;
+        cnt[x]++;
+        mx = max(mx, x);
     }
+
+    vll dp(mx + 1, -1);
+    cout << find(mx, dp, cnt) << endl;
+    return 0;
 }
