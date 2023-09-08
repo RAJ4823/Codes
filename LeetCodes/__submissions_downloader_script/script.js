@@ -6,23 +6,23 @@
 
 
 // load this address if you want to quickly understand how the JSON looks.
-LeetCodeSubmissionDownloader.LEETCODE_SUBMISSIONS_API = "https:\/\/leetcode.com\/api\/submissions"
-LeetCodeSubmissionDownloader.BASE_PROBLEM_ADDRESS = "https:\/\/leetcode.com\/problems\/";
+Downloader.LEETCODE_SUBMISSIONS_API = "https:\/\/leetcode.com\/api\/submissions"
+Downloader.BASE_PROBLEM_ADDRESS = "https:\/\/leetcode.com\/problems\/";
 
 // constants, change them if you want
-LeetCodeSubmissionDownloader.INCREASE_LAST_BY = 20;
-LeetCodeSubmissionDownloader.WAIT_BETWEEN_REQUESTS = 2500; // milliseconds
-LeetCodeSubmissionDownloader.INCREASE_WAIT_BY_ON_ERROR = 2; // multiplier to increase the wait for API timeouts. 
-LeetCodeSubmissionDownloader.SAVE_AS = "submissions.zip";
+Downloader.INCREASE_LAST_BY = 20;
+Downloader.WAIT_BETWEEN_REQUESTS = 2500; // milliseconds
+Downloader.INCREASE_WAIT_BY_ON_ERROR = 2; // multiplier to increase the wait for API timeouts. 
+Downloader.SAVE_AS = "submissions.zip";
 
 // Count of latest submissions to be downloaded
-LeetCodeSubmissionDownloader.COUNT = 500 
+Downloader.COUNT = 1000 
 // Submissions downloaded: 1100
 
 // last is the total amount of results that have been saved
-LeetCodeSubmissionDownloader.last = 0;
-LeetCodeSubmissionDownloader.waitUsedBetweenRequests = LeetCodeSubmissionDownloader.WAIT_BETWEEN_REQUESTS;
-LeetCodeSubmissionDownloader.folderContents = new JSZip();
+Downloader.last = 0;
+Downloader.waitUsedBetweenRequests = Downloader.WAIT_BETWEEN_REQUESTS;
+Downloader.folderContents = new JSZip();
 
 // converter for leetcode programming 
 // language representation to actual language extensions
@@ -54,50 +54,49 @@ function sleep(ms) {
 
 
 // This is the first function called. This script isn't packed into an object because I didn't see a purpose to do so.
-LeetCodeSubmissionDownloader.pullFromLeetCodeAPI = function () {
+Downloader.pullFromLeetCodeAPI = function () {
     try {
         // it doesn't seem possible to increase the limit beyond 20.
-        let address = new URL(LeetCodeSubmissionDownloader.LEETCODE_SUBMISSIONS_API + "?offset=" + LeetCodeSubmissionDownloader.last + "&limit=" + LeetCodeSubmissionDownloader.INCREASE_LAST_BY);
+        let address = new URL(Downloader.LEETCODE_SUBMISSIONS_API + "?offset=" + Downloader.last + "&limit=" + Downloader.INCREASE_LAST_BY);
         let xmlHttp = new XMLHttpRequest();
 
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                LeetCodeSubmissionDownloader.processAPIResults(xmlHttp.responseText);
+                Downloader.processAPIResults(xmlHttp.responseText);
             } else if (xmlHttp.readyState == 4) {
-                LeetCodeSubmissionDownloader.handleError();
+                Downloader.handleError();
             }
         }
 
         xmlHttp.addEventListener('error', function () {
-            LeetCodeSubmissionDownloader.handleError();
+            Downloader.handleError();
         });
         xmlHttp.open("GET", address, true);
         xmlHttp.send(null);
     } catch (e) {
-        LeetCodeSubmissionDownloader.handleError();
+        Downloader.handleError();
     }
 }
 
 // The errors will very likely be a timeout from LeetCode. It will increase the time out rate until it can't anymore if it keeps failing.
-LeetCodeSubmissionDownloader.handleError = async function () {
-    LeetCodeSubmissionDownloader.waitUsedBetweenRequests *= LeetCodeSubmissionDownloader.INCREASE_WAIT_BY_ON_ERROR;
-    console.log("Error: Failed to pull API data from " + LeetCodeSubmissionDownloader.LEETCODE_SUBMISSIONS_API + ". Doubling the wait time between requests to " + LeetCodeSubmissionDownloader.waitUsedBetweenRequests + " milliseconds.");
-    await sleep(LeetCodeSubmissionDownloader.waitUsedBetweenRequests);
-    LeetCodeSubmissionDownloader.pullFromLeetCodeAPI();
+Downloader.handleError = async function () {
+    Downloader.waitUsedBetweenRequests *= Downloader.INCREASE_WAIT_BY_ON_ERROR;
+    console.log("Error: Failed to pull API data from " + Downloader.LEETCODE_SUBMISSIONS_API + ". Doubling the wait time between requests to " + Downloader.waitUsedBetweenRequests + " milliseconds.");
+    await sleep(Downloader.waitUsedBetweenRequests);
+    Downloader.pullFromLeetCodeAPI();
 }
 
 // Uses JSZip to put the results found into a zip file.
-LeetCodeSubmissionDownloader.processAPIResults = async function (lastWebResult) {
+Downloader.processAPIResults = async function (lastWebResult) {
     let data = JSON.parse(lastWebResult);
     let submissionsFound = data.submissions_dump;
-    LeetCodeSubmissionDownloader.last += submissionsFound.length;
+    Downloader.last += submissionsFound.length;
 
     for (let i = 0; i < submissionsFound.length; i++) {
         let data = submissionsFound[i];
         if (data.status_display !== 'Accepted') continue;
-        LeetCodeSubmissionDownloader.COUNT--;
 
-        let problemFolder = LeetCodeSubmissionDownloader.folderContents.folder(data.title_slug);
+        let problemFolder = Downloader.folderContents.folder(data.title_slug);
         let dateFolder = problemFolder.folder(new Date(data.timestamp * 1000).toLocaleString('en-us').replaceAll("/", "-"));
 
         let leetcodeLangName = data.lang;
@@ -108,15 +107,16 @@ LeetCodeSubmissionDownloader.processAPIResults = async function (lastWebResult) 
         let submissionSourceCode = dateFolder.file(sourceCodeFileName, sourceCodeFileContents);
     }
 
-    if (!data.has_next || LeetCodeSubmissionDownloader.COUNT <= 0) {
+    if (!data.has_next || Downloader.last >= Downloader.COUNT) {
         await downloadSubmissionsData();
+        return;
     } else {
         await fetchMoreSubmissions();
     }
 }
 
 function getSourceCodeContents(data) {
-    let content = `// Link: ${LeetCodeSubmissionDownloader.BASE_PROBLEM_ADDRESS + String(data.title_slug)}
+    let content = `// Link: ${Downloader.BASE_PROBLEM_ADDRESS + String(data.title_slug)}
 
 /** Submission Info:
  *
@@ -136,23 +136,23 @@ ${String(data.code)}
 }
 
 async function downloadSubmissionsData() {
-    console.log("Total submissions saved:  " + LeetCodeSubmissionDownloader.last);
+    console.log("Total submissions saved:  " + Downloader.last);
     console.log("Complete! The archive should start downloading now.");
     // Uses the SaveAs library to actually start the browser to add what has been saved to the downloads.
-    LeetCodeSubmissionDownloader.folderContents.generateAsync({ type: "blob" }).then(function (content) {
-        saveAs(content, LeetCodeSubmissionDownloader.SAVE_AS);
+    Downloader.folderContents.generateAsync({ type: "blob" }).then(function (content) {
+        saveAs(content, Downloader.SAVE_AS);
     });
 }
 
 async function fetchMoreSubmissions() {
-    console.log("Submissions saved so far:  " + LeetCodeSubmissionDownloader.last);
-    await sleep(LeetCodeSubmissionDownloader.waitUsedBetweenRequests);
-    LeetCodeSubmissionDownloader.pullFromLeetCodeAPI();
+    console.log("Submissions saved so far:  " + Downloader.last);
+    await sleep(Downloader.waitUsedBetweenRequests);
+    Downloader.pullFromLeetCodeAPI();
 }
-// I just declared LeetCodeSubmissionDownloader as something so it wouldn't return an error.
-function LeetCodeSubmissionDownloader() {
+// I just declared Downloader as something so it wouldn't return an error.
+function Downloader() {
     return this;
 }
 
 // Starts the download process.
-LeetCodeSubmissionDownloader.pullFromLeetCodeAPI();
+Downloader.pullFromLeetCodeAPI();
