@@ -16,7 +16,8 @@ LeetCodeSubmissionDownloader.INCREASE_WAIT_BY_ON_ERROR = 2; // multiplier to inc
 LeetCodeSubmissionDownloader.SAVE_AS = "submissions.zip";
 
 // Count of latest submissions to be downloaded
-LeetCodeSubmissionDownloader.COUNT = 2000 
+LeetCodeSubmissionDownloader.COUNT = 500 
+// Submissions downloaded: 1100
 
 // last is the total amount of results that have been saved
 LeetCodeSubmissionDownloader.last = 0;
@@ -107,7 +108,7 @@ LeetCodeSubmissionDownloader.processAPIResults = async function (lastWebResult) 
         let submissionSourceCode = dateFolder.file(sourceCodeFileName, sourceCodeFileContents);
     }
 
-    if (!data.has_next || LeetCodeSubmissionDownloader.COUNT == 0) {
+    if (!data.has_next || LeetCodeSubmissionDownloader.COUNT <= 0) {
         await downloadSubmissionsData();
     } else {
         await fetchMoreSubmissions();
