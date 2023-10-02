@@ -9,8 +9,8 @@ Contains all codes written by RAJ.
  - [Codeforces](https://codeforces.com/profile/Raj_4)
  - [Codechef](https://www.codechef.com/users/the_247)
  - [LeetCode](https://leetcode.com/the_247)
- - [HackerRank](https://www.hackerrank.com/raj_4823)
- - [Coding Ninjas](https://www.codingninjas.com/codestudio/profile/92c4c4f1-b6ac-44ab-86cd-6cefd9071955)
+ - [HackerRank](https://www.hackerrank.com/the_247)
+ - [CodingNinjas](https://www.codingninjas.com/studio/profile/the_247)
 
 ## Authors
 
