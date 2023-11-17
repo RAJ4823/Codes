@@ -17,7 +17,7 @@ Downloader.SAVE_AS = "submissions.zip";
 
 // Count of latest submissions to be downloaded
 Downloader.COUNT = 300 
-// Submissions downloaded: 1200
+// Submissions downloaded: 1460
 
 // last is the total amount of results that have been saved
 Downloader.last = 0;
