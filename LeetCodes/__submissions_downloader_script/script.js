@@ -16,7 +16,7 @@ Downloader.INCREASE_WAIT_BY_ON_ERROR = 2; // multiplier to increase the wait for
 Downloader.SAVE_AS = "submissions.zip";
 
 // Count of latest submissions to be downloaded
-Downloader.COUNT = 300 
+Downloader.COUNT = 500 
 // Submissions downloaded: 1460
 
 // last is the total amount of results that have been saved
