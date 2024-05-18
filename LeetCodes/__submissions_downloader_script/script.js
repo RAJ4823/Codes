@@ -10,7 +10,7 @@ Downloader.LEETCODE_SUBMISSIONS_API = "https:\/\/leetcode.com\/api\/submissions"
 Downloader.BASE_PROBLEM_ADDRESS = "https:\/\/leetcode.com\/problems\/";
 
 // constants, change them if you want
-Downloader.INCREASE_LAST_BY = 20;
+Downloader.INCREASE_LAST_BY = 20;   
 Downloader.WAIT_BETWEEN_REQUESTS = 2500; // milliseconds
 Downloader.INCREASE_WAIT_BY_ON_ERROR = 2; // multiplier to increase the wait for API timeouts. 
 Downloader.SAVE_AS = "submissions.zip";
